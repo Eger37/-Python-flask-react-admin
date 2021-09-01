@@ -1,5 +1,5 @@
 from flask import Flask, request
-from flask_restful import Resource,  Api
+from flask_restful import Resource, Api
 from flask_jwt_extended import JWTManager
 from flask_jwt_extended import create_access_token, jwt_required
 from flask_cors import CORS
