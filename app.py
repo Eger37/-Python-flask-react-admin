@@ -16,7 +16,7 @@ class UserLogin(Resource):
     def post(self):
         username = request.get_json()['username']
         password = request.get_json()['password']
-        if username == 'admin' and password == 'habr':
+        if username == 'admin' and password == 'admin':
             access_token = create_access_token(identity={
                 'role': 'admin',
             }, expires_delta=False)
