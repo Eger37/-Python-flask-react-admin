@@ -19,7 +19,7 @@ class ProtectArea(Resource):
         return {'answer': 42}
 
 
-api.add_resource(AdminLogin, '/api/login/')
+api.add_resource(AdminLogin, '/api/admin/login/')
 api.add_resource(ProtectArea, '/api/protect-area/')
 
 if __name__ == '__main__':

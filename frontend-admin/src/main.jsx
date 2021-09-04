@@ -4,11 +4,10 @@ import Dashboard from './Dashboard'
 import authProvider from './authProvider';
 import {UserList} from './users'
 import {PostList, PostEdit, PostCreate} from './posts'
-import jsonServerProvider from 'ra-data-json-server'
 import PostIcon from '@material-ui/icons/Book'
 import UserIcon from '@material-ui/icons/Group'
+import dataProvider from "./dataProvider"
 
-const dataProvider = jsonServerProvider('https://jsonplaceholder.typicode.com')
 const Main = () => (
     <div>
         <Admin dashboard={Dashboard} authProvider={authProvider} dataProvider={dataProvider}>

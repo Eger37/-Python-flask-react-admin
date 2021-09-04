@@ -8,7 +8,7 @@ export default (type, params) => {
         const {username, password} = params
         let data = JSON.stringify({username, password})
 
-        return axios.post('http://localhost:5000/api/login/', data, {
+        return axios.post('http://localhost:5000/api/admin/login/', data, {
             headers: {
                 'Content-Type': 'application/json',
             }
