@@ -14,3 +14,14 @@ class AdminLogin(Resource):
             result = {'token': access_token}
             return result
         return {'error': 'Invalid username and password'}
+
+
+class AdminUsersList(Resource):
+    def post(self):
+        return {
+            {" id ": 0, " author_id ": 0, " title ": " Анна Каренина "},
+            {" id ": 1, " author_id ": 0, " title ": " Война и мир "},
+            {" id ": 2, " author_id ": 1, " title ": " Гордость и предубеждение "},
+            {" id ": 2, " author_id ": 1, " title ": " Гордость и предубеждение "},
+            {" id ": 3, " author_id ": 1, " title ": " Разум и чувствительность "}
+        }
