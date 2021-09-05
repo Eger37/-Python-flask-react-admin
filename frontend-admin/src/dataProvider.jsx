@@ -9,8 +9,8 @@ const httpClient = (url, options = {}) => {
         options.headers = new Headers({ Accept: 'application/json' });
     }
     // add your own headers here
-    options.headers.set('Content-Type', 'foobar');
-    options.headers.set('content-range', 'foobar');
+    options.headers.set('Content-Type', 'application/json');
+    options.headers.set('content-range', '5');
     return fetchUtils.fetchJson(url, options);
 }
 
@@ -32,8 +32,8 @@ export default {
         console.log(ret)
         ret = ret.then(({headers, json}) => ({
             data: json,
-            total: 5,
-            // total: parseInt(headers.get('content-range').split('/').pop(), 10),
+            // total: 5,
+            total: parseInt(headers.get('content-range').split('/').pop(), 10),
         }))
         console.log(ret)
         return ret
