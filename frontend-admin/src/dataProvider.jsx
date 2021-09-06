@@ -1,18 +1,21 @@
 import {fetchUtils} from 'react-admin'
+import axios from 'axios'
 import {stringify} from 'query-string'
 
-const apiUrl = 'http://localhost:5000/api/admin'
-// const httpClient = fetchUtils.fetchJson
 
-const httpClient = (url, options = {}) => {
-    if (!options.headers) {
-        options.headers = new Headers({ Accept: 'application/json' });
-    }
-    // add your own headers here
-    options.headers.set('Content-Type', 'application/json');
-    options.headers.set('content-range', '5');
-    return fetchUtils.fetchJson(url, options);
-}
+const apiUrl = 'http://localhost:5000/api/admin'
+const httpClient = fetchUtils.fetchJson
+
+// const httpClient = (url, options = {}) => {
+//     if (!options.headers) {
+//         // options.headers = new Headers({Accept: 'application/json'})
+//         options.headers = new Headers({'content-range': 5})
+//     }
+//     // add your own headers here
+//     options.headers.set('Content-Type', 'application/json')
+//     options.headers.set('content-range', '5')
+//     return fetchUtils.fetchJson(url, options)
+// }
 
 export default {
     getList: (resource, params) => {
@@ -24,20 +27,40 @@ export default {
             filter: JSON.stringify(params.filter),
         }
         // const url = `${apiUrl}/${resource}?${stringify(query)}`
-        // const url = `${apiUrl}/${resource}`
-        const url = 'http://localhost:5000/api/admin/users'
+        const url = `${apiUrl}/${resource}`
         // console.log(url)
+        // let ret = httpClient(url)
 
-        let ret = httpClient(url)
+        // let ret = fetch(url, {
+        //     method: "GET",
+        //     // headers: {'Content-Type': 'application/json', 'Content-Range': 'posts 0-24/319'}
+        //     headers: {'Content-Type': 'application/json', 'Content-Range': '<unit> <range-start>-<range-end>/*'}
+        // })
+
+
+        let ret = axios.get(url, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Content-Range': 'posts 0-24/319'
+            }
+        })
+
+        // let ret = axios.get(url, {
+        //     headers: {
+        //         // 'Content-Type': 'application/json',
+        //         'Content-Range': 'posts 0-24/319'
+        //     }})
+
+
         console.log(ret)
         ret = ret.then(({headers, json}) => ({
             data: json,
-            // total: 5,
             total: parseInt(headers.get('content-range').split('/').pop(), 10),
         }))
         console.log(ret)
         return ret
     },
+
 
     // getOne: (resource, params) =>
     //     httpClient(`${apiUrl}/${resource}/${params.id}`).then(({json}) => ({
