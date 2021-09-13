@@ -1,4 +1,4 @@
-from flask import Flask, make_response
+from flask import Flask, make_response, jsonify
 from flask_restful import reqparse, abort, Api, Resource
 from flask_jwt_extended import JWTManager
 from flask_jwt_extended import jwt_required
@@ -13,11 +13,6 @@ CORS(app)
 
 api = Api(app)
 
-# TODOS = {
-#     'todo1': {'task': 'build an API'},
-#     'todo2': {'task': '?????'},
-#     'todo3': {'task': 'profit!'},
-# }
 TODOS = [{"id": 0, "name": 0, "title": " Анна Каренина "},
          {"id": 1, "name": 0, "title": " Война и мир "},
          {"id": 2, "name": 1, "title": " Гордость и предубеждение "},
@@ -63,7 +58,15 @@ class Todo(Resource):
 # shows a list of all todos, and lets you POST to add new tasks
 class TodoList(Resource):
     def get(self):
-        return TODOS, 200, {'Content-Type': 'application/json', 'Content-Range': 5}
+        response = jsonify(TODOS)
+        response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3000')
+        # response.headers.add('content-type', 'application/json')
+        response.headers.add('content-range', 5)
+        response.headers.add('X-PINGOTHER', 'pingpong')
+        response.headers.add('Access-Control-Allow-Headers', 'X-PINGOTHER')
+        response.headers.add('Access-Control-Expose-Headers', 'X-PINGOTHER, content-range')
+        return response
+        # return TODOS, 200, {'content-type': 'application/json', 'content-range': 5}
 
     def post(self):
         args = parser.parse_args()
@@ -73,17 +76,32 @@ class TodoList(Resource):
         return TODOS[todo_id], 201
 
 
-#
-# Actually setup the Api resource routing here
-#
 # api.add_resource(TodoList, '/todos')
 # api.add_resource(Todo, '/todos/<todo_id>')
-api.add_resource(TodoList, '/api/admin/users')
-api.add_resource(Todo, '/todos/<todo_id>')
 
+# @app.route('/api/admin/users', methods=['GET'])
+# @cross_origin(
+# origin='http://localhost:3000',
+# headers=['Access-Control-Allow-Origin', 'content-type', 'authorization',
+#          'Access-Control-Allow-Headers', 'content-range'])
+# def test():
+#     response = jsonify(TODOS)
+#     response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3000')
+#     # response.headers.add('content-type', 'application/json')
+#     response.headers.add('content-range', 5)
+#     response.headers.add('X-PINGOTHER', 'pingpong')
+#     response.headers.add('Access-Control-Allow-Headers', 'X-PINGOTHER')
+#     response.headers.add('Access-Control-Expose-Headers', 'X-PINGOTHER, content-range')
+#     return response
+
+
+api.add_resource(TodoList, '/api/admin/users')
+
+api.add_resource(Todo, '/todos/<todo_id>')
+#
 api.add_resource(AdminLogin, '/api/admin/login/')
 # api.add_resource(AdminUsersList, '/api/admin/users/')
 api.add_resource(ProtectArea, '/api/protect-area/')
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug=True, host='0.0.0.0', port=5000)

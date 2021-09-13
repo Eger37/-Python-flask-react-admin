@@ -1,10 +1,9 @@
-import {fetchUtils} from 'react-admin'
-import axios from 'axios'
-import {stringify} from 'query-string'
-
-
+// import {fetchUtils} from 'react-admin'
+// import axios from 'axios'
+// import {stringify} from 'query-string'
 const apiUrl = 'http://localhost:5000/api/admin'
-const httpClient = fetchUtils.fetchJson
+
+// const httpClient = fetchUtils.fetchJson
 
 // const httpClient = (url, options = {}) => {
 //     if (!options.headers) {
@@ -13,11 +12,26 @@ const httpClient = fetchUtils.fetchJson
 //     }
 //     // add your own headers here
 //     options.headers.set('Content-Type', 'application/json')
-//     options.headers.set('content-range', '5')
 //     return fetchUtils.fetchJson(url, options)
 // }
 
 export default {
+    // getList: (resource, params) => {
+    //     const { page, perPage } = params.pagination;
+    //     const { field, order } = params.sort;
+    //     const query = {
+    //         sort: JSON.stringify([field, order]),
+    //         range: JSON.stringify([(page - 1) * perPage, page * perPage - 1]),
+    //         filter: JSON.stringify(params.filter),
+    //     };
+    //     const url = `${apiUrl}/${resource}?${stringify(query)}`;
+    //
+    //     return httpClient(url).then(({ headers, json }) => ({
+    //         data: json,
+    //         total: parseInt(headers.get('content-range').split('/').pop(), 10),
+    //     }));
+    // },
+    //
     getList: (resource, params) => {
         const {page, perPage} = params.pagination
         const {field, order} = params.sort
@@ -31,32 +45,21 @@ export default {
         // console.log(url)
         // let ret = httpClient(url)
 
-        // let ret = fetch(url, {
-        //     method: "GET",
-        //     // headers: {'Content-Type': 'application/json', 'Content-Range': 'posts 0-24/319'}
-        //     headers: {'Content-Type': 'application/json', 'Content-Range': '<unit> <range-start>-<range-end>/*'}
-        // })
 
-
-        let ret = axios.get(url, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Content-Range': 'posts 0-24/319'
-            }
-        })
-
-        // let ret = axios.get(url, {
+        // const headers = {
         //     headers: {
-        //         // 'Content-Type': 'application/json',
-        //         'Content-Range': 'posts 0-24/319'
-        //     }})
+        // 'Access-Control-Allow-Origin': 'http://localhost:3000',
+        // 'Access-Control-Allow-Methods': 'GET',
+        // 'Access-Control-Allow-Headers': 'content-range',
+        // 'Access-Control-Expose-Headers': 'content-range',
+        //     },
+        // }
 
-
-        console.log(ret)
-        ret = ret.then(({headers, json}) => ({
-            data: json,
-            total: parseInt(headers.get('content-range').split('/').pop(), 10),
-        }))
+        let ret = fetch(url, {method: "GET"})
+            .then(({headers, json}) => ({
+                data: json,
+                total: parseInt(headers.get('content-range').split('/').pop(), 10),
+            }))
         console.log(ret)
         return ret
     },
