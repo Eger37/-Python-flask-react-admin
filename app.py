@@ -16,8 +16,8 @@ api = Api(app)
 TODOS = [{"id": 0, "name": 0, "title": " Анна Каренина "},
          {"id": 1, "name": 0, "title": " Война и мир "},
          {"id": 2, "name": 1, "title": " Гордость и предубеждение "},
-         {"id": 2, "name": 1, "title": " Гордость и предубеждение "},
-         {"id": 3, "name": 1, "title": " Разум и чувствительность "}]
+         {"id": 3, "name": 1, "title": " Гордость и предубеждение "},
+         {"id": 4, "name": 1, "title": " Разум и чувствительность "}]
 
 
 def abort_if_todo_doesnt_exist(todo_id):
@@ -60,11 +60,11 @@ class TodoList(Resource):
     def get(self):
         response = jsonify(TODOS)
         response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3000')
+        # response.headers.add('Access-Control-Allow-Origin', ' http://localhost:3001')
         # response.headers.add('content-type', 'application/json')
+        # response.headers.add('Access-Control-Allow-Headers', 'content-range')
+        response.headers.add('Access-Control-Expose-Headers', 'content-range')
         response.headers.add('content-range', 5)
-        response.headers.add('X-PINGOTHER', 'pingpong')
-        response.headers.add('Access-Control-Allow-Headers', 'X-PINGOTHER')
-        response.headers.add('Access-Control-Expose-Headers', 'X-PINGOTHER, content-range')
         return response
         # return TODOS, 200, {'content-type': 'application/json', 'content-range': 5}
 

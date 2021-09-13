@@ -55,12 +55,21 @@ export default {
         //     },
         // }
 
+        let headers
         let ret = fetch(url, {method: "GET"})
-            .then(({headers, json}) => ({
-                data: json,
-                total: parseInt(headers.get('content-range').split('/').pop(), 10),
-            }))
-        console.log(ret)
+            .then(response => {
+                headers = response.headers
+                return response.json()
+            })
+            .then((data) => {
+                console.log(data)
+                console.log(headers.get('content-range'))
+                const a = {
+                    data: data,
+                    total: parseInt(headers.get('content-range').split('/').pop(), 10),
+                }
+                return a
+        })
         return ret
     },
 
