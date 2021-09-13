@@ -33,18 +33,20 @@ export default {
     // },
     //
     getList: (resource, params) => {
-        const {page, perPage} = params.pagination
-        const {field, order} = params.sort
-        const query = {
-            sort: JSON.stringify([field, order]),
-            range: JSON.stringify([(page - 1) * perPage, page * perPage - 1]),
-            filter: JSON.stringify(params.filter),
-        }
-        // const url = `${apiUrl}/${resource}?${stringify(query)}`
-        const url = `${apiUrl}/${resource}`
-        // console.log(url)
-        // let ret = httpClient(url)
+        console.log(params)
+        // const {page, perPage} = params.pagination
+        // const {field, order} = params.sort
+        // const query = {
+        //     sort: JSON.stringify([field, order]),
+        //     range: JSON.stringify([(page - 1) * perPage, page * perPage - 1]),
+        //     filter: JSON.stringify(params.filter),
+        // }
 
+        // const url = `${apiUrl}/${resource}?${stringify(query)}`
+
+        const url = `${apiUrl}/${resource}/`
+
+        // console.log(url)
 
         // const headers = {
         //     headers: {
@@ -56,7 +58,7 @@ export default {
         // }
 
         let headers
-        let ret = fetch(url, {method: "GET"})
+        return fetch(url, {method: "GET"})
             .then(response => {
                 headers = response.headers
                 return response.json()
@@ -64,13 +66,11 @@ export default {
             .then((data) => {
                 console.log(data)
                 console.log(headers.get('content-range'))
-                const a = {
+                return {
                     data: data,
                     total: parseInt(headers.get('content-range').split('/').pop(), 10),
                 }
-                return a
-        })
-        return ret
+            })
     },
 
 

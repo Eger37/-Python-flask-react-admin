@@ -79,28 +79,15 @@ class TodoList(Resource):
 # api.add_resource(TodoList, '/todos')
 # api.add_resource(Todo, '/todos/<todo_id>')
 
-# @app.route('/api/admin/users', methods=['GET'])
-# @cross_origin(
-# origin='http://localhost:3000',
-# headers=['Access-Control-Allow-Origin', 'content-type', 'authorization',
-#          'Access-Control-Allow-Headers', 'content-range'])
-# def test():
-#     response = jsonify(TODOS)
-#     response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3000')
-#     # response.headers.add('content-type', 'application/json')
-#     response.headers.add('content-range', 5)
-#     response.headers.add('X-PINGOTHER', 'pingpong')
-#     response.headers.add('Access-Control-Allow-Headers', 'X-PINGOTHER')
-#     response.headers.add('Access-Control-Expose-Headers', 'X-PINGOTHER, content-range')
-#     return response
 
-
-api.add_resource(TodoList, '/api/admin/users')
+# api.add_resource(TodoList, '/api/admin/users')
 
 api.add_resource(Todo, '/todos/<todo_id>')
-#
+
 api.add_resource(AdminLogin, '/api/admin/login/')
-# api.add_resource(AdminUsersList, '/api/admin/users/')
+
+api.add_resource(AdminUsersList, '/api/admin/users/')
+
 api.add_resource(ProtectArea, '/api/protect-area/')
 
 if __name__ == '__main__':
