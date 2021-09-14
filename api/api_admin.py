@@ -47,45 +47,28 @@ def format_list(list_response):
     args = parser.parse_args()
     length = len(list_response)
 
-    filter_of_list = {'filter': args['filter']}
-    sort_of_list = args['sort'].replace('[', '').replace(']', '').replace('\"', '').split(',')
-    sort_key = sort_of_list[0]
-    order = False
-    if sort_of_list[1] != 'ASC':
-        order = True
+    # filter_of_list = args['filter']
+    # if filter_of_list:
+    #     filter_of_list = args['filter'].replace('[', '').replace(']', '').replace('\"', '')
 
-    list_response = sorted(list_response, key=itemgetter(sort_key), reverse=order)
+    sort_of_list = args['sort']
+    if sort_of_list:
+        sort_of_list = sort_of_list.replace('[', '').replace(']', '').replace('\"', '').split(',')
+        sort_key = sort_of_list[0]
+        order = False
+        if sort_of_list[1] != 'ASC':
+            order = True
+        list_response = sorted(list_response, key=itemgetter(sort_key), reverse=order)
 
-    range_of_list = args['range'].replace('[', '').replace(']', '').split(',')
-    section_start, section_end = tuple(map(int, range_of_list))
-    section_of_list = list_response[section_start: section_end]
-
-    # range_of_list
-    # {'range': '[10,19]'}
-    # filter_of_list
-    # {'filter': '{}'}
-    # sort_of_list
-    # {'sort': '["name","DESC"]'}
-
-    print("filter_of_list")
-    print(filter_of_list)
-
-    print("sort_of_list")
-    print(sort_of_list)
-
-    print(section_of_list)
+    range_of_list = args['range']
+    section_start, section_end, section_of_list = 0, 0, []
+    if range_of_list:
+        range_of_list = range_of_list.replace('[', '').replace(']', '').split(',')
+        section_start, section_end = tuple(map(int, range_of_list))
+        section_of_list = list_response[section_start: section_end]
 
     str_content_range = f'{section_start}-{section_end}/{length}'
     return str_content_range, section_of_list
-
-
-# def content_range(list_response):
-#     # length = len(list_response)
-#     length = 15
-#     # print(length)
-#
-#     str_content_range = f'0-5/{length}'
-#     return str_content_range
 
 
 class AdminLogin(Resource):

@@ -13,7 +13,7 @@ import {
     SelectInput,
     TextInput,
 } from 'react-admin'
-import {useMediaQuery} from '@material-ui/core';
+import {useMediaQuery} from '@material-ui/core'
 
 const PostTitle = ({record}) => {
     return <span>Post {record ? `"${record.title}"` : ''}</span>
