@@ -86,7 +86,7 @@ api.add_resource(Todo, '/todos/<todo_id>')
 
 api.add_resource(AdminLogin, '/api/admin/login/')
 
-api.add_resource(AdminUsersList, '/api/admin/users/')
+api.add_resource(AdminUsersList, '/api/admin/users')
 
 api.add_resource(ProtectArea, '/api/protect-area/')
 
