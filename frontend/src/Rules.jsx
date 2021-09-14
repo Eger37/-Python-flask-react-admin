@@ -1,10 +1,13 @@
 import React from 'react'
 import css from "./Rules.module.css"
+import {NavLink} from "react-router-dom";
 
 export default class RulePage extends React.Component {
     render() {
         return (
             <div className={css.mainer}>
+                <NavLink to={"/"}>main</NavLink> &nbsp;|&nbsp;
+
                 <div className={css.title}>Rules</div>
                 <div className={css.first_layer}>
                     <div className={css.second_layer}>

@@ -3,7 +3,7 @@ import {BrowserRouter, Route} from "react-router-dom"
 import {getAnyAccessToken} from "./auth"
 import {io} from "socket.io-client"
 
-import css from "./Main.module.css"
+// import css from "./Main.module.css"
 import MainInfo from "./MainInfo"
 import RulePage from "./Rules"
 
