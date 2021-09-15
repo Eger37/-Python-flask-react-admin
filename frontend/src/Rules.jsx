@@ -1,8 +1,22 @@
 import React from 'react'
 import css from "./Rules.module.css"
 import {NavLink} from "react-router-dom";
+import {socket} from "./Main";
 
 export default class RulePage extends React.Component {
+
+    componentDidMount() {
+        socket.emit("connect to page", {data: "Rules"})
+        // socket.on("connect", this.EmitJoinMyRoom)
+        // socket.on("disconnect", this.EmitLeaveMyRoom)
+    }
+
+    componentWillUnmount() {
+        socket.emit("disconnect from page", {data: "Rules"})
+        // socket.off("connect")
+        // socket.off("disconnect")
+    }
+
     render() {
         return (
             <div className={css.mainer}>

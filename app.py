@@ -50,23 +50,29 @@ users_list = [{"id": 0, "name": "Никита12"},
 #     def get(self):
 #         return {'answer': 42}
 
-# Whenever someone connects this gets executed
-@socket.on('connect')
-def on_connect(data):
-    print('on_connect')
-    print(data)
-
-
-# Whenever someone disconnects this piece of code executed
-@socket.on('disconnect')
-def on_disconnect():
-    print('on_disconnect')
-
-
-# @socket.on('message')
+# # Whenever someone connects this gets executed
+# @socket.on('connect')
 # def on_connect(data):
-#     print("afssaffas")
+#     print('on_connect')
 #     print(data)
+
+
+# # Whenever someone disconnects this piece of code executed
+# @socket.on('disconnect')
+# def on_disconnect():
+#     print('on_disconnect')
+
+
+@socket.on('connect to page')
+def on_connect_to_page(data):
+    print(data)
+    print('went to the page')
+
+
+@socket.on('disconnect from page')
+def on_disconnect_from_page(data):
+    print(data)
+    print('disconnect from page')
 
 
 api.add_resource(AdminLogin, '/api/admin/login/')

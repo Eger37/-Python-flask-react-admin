@@ -17,23 +17,25 @@ class Main extends React.Component {
     }
 
 
-    EmitJoinMyRoom = () => {
-        socket.emit("join my room", getAccessToken())
-    }
-
-    EmitLeaveMyRoom = () => {
-        socket.emit("leave my room", getAccessToken())
-    }
+    // EmitJoinMyRoom = () => {
+    //     socket.emit("join my room", getAccessToken())
+    // }
+    //
+    // EmitLeaveMyRoom = () => {
+    //     socket.emit("leave my room", getAccessToken())
+    // }
 
     componentDidMount() {
-        socket.on("connect", this.EmitJoinMyRoom)
-        socket.emit("message", getAccessToken())
-        socket.on("disconnect", this.EmitLeaveMyRoom)
+        // socket.on("connect", this.EmitJoinMyRoom)
+        // socket.emit("connect to page", {data: "llll"})
+        // socket.on("disconnect", this.EmitLeaveMyRoom)
     }
 
     componentWillUnmount() {
-        socket.off("connect")
-        socket.off("disconnect")
+        // socket.emit("disconnect from page", {data: "llll"})
+
+        // socket.off("connect")
+        // socket.off("disconnect")
     }
 
     render() {
