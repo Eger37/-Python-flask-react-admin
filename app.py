@@ -7,8 +7,9 @@ from flask_socketio import SocketIO, send, disconnect, emit, join_room, leave_ro
 
 from api.api_admin import AdminLogin, AdminUsersList
 
-
 app = Flask(__name__)
+
+socket = SocketIO(app, cors_allowed_origins=["http://localhost:3000", "http://localhost:3001"], logger=True)
 
 app.config['JWT_SECRET_KEY'] = 'my_cool_secret'
 jwt = JWTManager(app)
@@ -44,17 +45,36 @@ users_list = [{"id": 0, "name": "Никита12"},
               {"id": 25, "name": "Никалераи6та122"}]
 
 
-class ProtectArea(Resource):
-    @jwt_required
-    def get(self):
-        return {'answer': 42}
+# class ProtectArea(Resource):
+#     @jwt_required
+#     def get(self):
+#         return {'answer': 42}
+
+# Whenever someone connects this gets executed
+@socket.on('connect')
+def on_connect(data):
+    print('on_connect')
+    print(data)
+
+
+# Whenever someone disconnects this piece of code executed
+@socket.on('disconnect')
+def on_disconnect():
+    print('on_disconnect')
+
+
+# @socket.on('message')
+# def on_connect(data):
+#     print("afssaffas")
+#     print(data)
 
 
 api.add_resource(AdminLogin, '/api/admin/login/')
 
 api.add_resource(AdminUsersList, '/api/admin/users')
 
-api.add_resource(ProtectArea, '/api/protect-area/')
+# api.add_resource(ProtectArea, '/api/protect-area/')
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    # app.run(debug=True, host='0.0.0.0', port=5000)
+    socket.run(app, host='0.0.0.0', debug=True, port=5000)

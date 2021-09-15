@@ -1,14 +1,13 @@
 import React from "react"
 import {BrowserRouter, Route} from "react-router-dom"
-import {getAnyAccessToken} from "./auth"
-import {io} from "socket.io-client"
+import io from "socket.io-client"
 
 // import css from "./Main.module.css"
+import {getAccessToken} from "./auth"
 import MainInfo from "./MainInfo"
 import RulePage from "./Rules"
 
-// let socket = socketIOClient("http://lacalhost:5000/")
-let socket = io.connect("http://lacalhost:5000/")
+let socket = io.connect("localhost:5000/")
 
 
 class Main extends React.Component {
@@ -17,16 +16,18 @@ class Main extends React.Component {
         this.state = {}
     }
 
+
     EmitJoinMyRoom = () => {
-        socket.emit("join my room", getAnyAccessToken())
+        socket.emit("join my room", getAccessToken())
     }
 
     EmitLeaveMyRoom = () => {
-        socket.emit("leave my room", getAnyAccessToken())
+        socket.emit("leave my room", getAccessToken())
     }
 
     componentDidMount() {
         socket.on("connect", this.EmitJoinMyRoom)
+        socket.emit("message", getAccessToken())
         socket.on("disconnect", this.EmitLeaveMyRoom)
     }
 
