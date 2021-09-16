@@ -51,19 +51,16 @@ users_list = [{"id": 0, "name": "Никита12"},
 #         return {'answer': 42}
 
 
-
-
-# Whenever someone connects this gets executed
-@socket.on('connect')
-def on_connect(data):
-    print(data.remote_addr)
-    print('on_connect')
-
-
-# Whenever someone disconnects this piece of code executed
-@socket.on('disconnect')
-def on_disconnect():
-    print('on_disconnect')
+# # Whenever someone connects this gets executed
+# @socket.on('connect')
+# def on_connect(data):
+#     print('on_connect')
+#
+#
+# # Whenever someone disconnects this piece of code executed
+# @socket.on('disconnect')
+# def on_disconnect():
+#     print('on_disconnect')
 
 
 @socket.on('connect to page')

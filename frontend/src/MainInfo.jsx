@@ -9,17 +9,11 @@ export default class MainInfo extends React.Component {
 
 
     componentDidMount() {
-        console.log(getId())
-        console.log(window.location.href)
-        socket.emit("connect to page", {data: "MainInfo"})
-        // socket.on("connect", this.EmitJoinMyRoom)
-        // socket.on("disconnect", this.EmitLeaveMyRoom)
+        socket.emit("connect to page", {id: getId(), url: window.location.href})
     }
 
     componentWillUnmount() {
-        socket.emit("disconnect from page", {data: "MainInfo"})
-        // socket.off("connect")
-        // socket.off("disconnect")
+        socket.emit("disconnect from page", {id: getId(), url: window.location.href})
     }
 
     render() {

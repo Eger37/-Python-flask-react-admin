@@ -7,18 +7,11 @@ import {getId} from "./auth";
 export default class RulePage extends React.Component {
 
     componentDidMount() {
-
-        console.log(getId())
-        console.log(window.location.href)
-        socket.emit("connect to page", {data: "Rules"})
-        // socket.on("connect", this.EmitJoinMyRoom)
-        // socket.on("disconnect", this.EmitLeaveMyRoom)
+        socket.emit("connect to page", {id: getId(), url: window.location.href})
     }
 
     componentWillUnmount() {
-        socket.emit("disconnect from page", {data: "Rules"})
-        // socket.off("connect")
-        // socket.off("disconnect")
+        socket.emit("disconnect from page", {id: getId(), url: window.location.href})
     }
 
     render() {
