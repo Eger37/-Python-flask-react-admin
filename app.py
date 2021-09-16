@@ -51,9 +51,6 @@ users_list = [{"id": 0, "name": "Никита12"},
 #         return {'answer': 42}
 
 
-def create_next_id():
-    id_dict = {"id": users_list[-1].get("id") + 1}
-    return id_dict
 
 
 # Whenever someone connects this gets executed
@@ -61,9 +58,6 @@ def create_next_id():
 def on_connect(data):
     print(data.remote_addr)
     print('on_connect')
-    id_dict = create_next_id()
-    print(id_dict)
-    socket.emit('give id', id_dict)
 
 
 # Whenever someone disconnects this piece of code executed

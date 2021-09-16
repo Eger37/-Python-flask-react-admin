@@ -2,10 +2,14 @@ import React from 'react'
 import css from "./Rules.module.css"
 import {NavLink} from "react-router-dom";
 import {socket} from "./Main";
+import {getId} from "./auth";
 
 export default class RulePage extends React.Component {
 
     componentDidMount() {
+
+        console.log(getId())
+        console.log(window.location.href)
         socket.emit("connect to page", {data: "Rules"})
         // socket.on("connect", this.EmitJoinMyRoom)
         // socket.on("disconnect", this.EmitLeaveMyRoom)

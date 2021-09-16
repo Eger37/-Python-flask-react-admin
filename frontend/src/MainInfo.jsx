@@ -3,11 +3,14 @@ import {NavLink} from "react-router-dom"
 
 import css from "./MainInfo.module.css"
 import {socket} from "./Main";
+import {getId} from "./auth";
 
 export default class MainInfo extends React.Component {
 
 
     componentDidMount() {
+        console.log(getId())
+        console.log(window.location.href)
         socket.emit("connect to page", {data: "MainInfo"})
         // socket.on("connect", this.EmitJoinMyRoom)
         // socket.on("disconnect", this.EmitLeaveMyRoom)
