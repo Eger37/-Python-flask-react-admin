@@ -3,7 +3,7 @@ import {BrowserRouter, Route} from "react-router-dom"
 import io from "socket.io-client"
 
 // import css from "./Main.module.css"
-import {getAccessToken} from "./auth"
+import {getId} from "./auth"
 import MainInfo from "./MainInfo"
 import RulePage from "./Rules"
 
@@ -25,17 +25,25 @@ class Main extends React.Component {
     //     socket.emit("leave my room", getAccessToken())
     // }
 
+    GetId(data) {
+        console.log("GetId(data)")
+        console.log(data)
+    }
+
     componentDidMount() {
-        // socket.on("connect", this.EmitJoinMyRoom)
+        console.log(getId())
+        socket.on("connect", () => (console.log("socket.on(connect)")))
+        socket.on("give id", this.GetId)
         // socket.emit("connect to page", {data: "llll"})
-        // socket.on("disconnect", this.EmitLeaveMyRoom)
+        socket.on("disconnect", () => (console.log("socket.on(disconnect)")))
     }
 
     componentWillUnmount() {
         // socket.emit("disconnect from page", {data: "llll"})
 
-        // socket.off("connect")
-        // socket.off("disconnect")
+        socket.off("connect")
+        socket.off("give id")
+        socket.off("disconnect")
     }
 
     render() {
