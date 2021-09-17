@@ -1,17 +1,18 @@
 import React from 'react'
-import css from "./Rules.module.css"
 import {NavLink} from "react-router-dom";
+
+import css from "./Rules.module.css"
 import {socket} from "./Main";
 import {getId} from "./auth";
 
 export default class RulePage extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {url: window.location.href}
+        this.state = {web_page_url: window.location.href}
     }
 
     componentDidMount() {
-        socket.emit("connect to page", {id: getId(), url: this.state.url})
+        socket.emit("connect to page", {"end_user_id": getId(), "web_page_url": this.state.web_page_url})
     }
 
     componentWillUnmount() {

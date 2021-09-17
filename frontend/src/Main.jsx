@@ -27,7 +27,7 @@ class Main extends React.Component {
 
 
     componentDidMount() {
-        socket.on("connect", () => (socket.emit("give id in start", {id: getId()})))
+        socket.on("connect", () => (socket.emit("give id in start", {end_user_id: getId()})))
         // socket.on("disconnect", () => (socket.emit("test", {id: getId()})))
     }
 

@@ -23,15 +23,15 @@ sessions_ids_dict = {}
 @socket.on('give id in start')
 def on_get_id_in_start(data):
     current_socket_id = request.sid
-    user_id = data.get("id")
+    end_user_id = data.get("end_user_id")
     try:
-        old_socket_id = (list(sessions_ids_dict.keys())[list(sessions_ids_dict.values()).index(user_id)])
+        old_socket_id = (list(sessions_ids_dict.keys())[list(sessions_ids_dict.values()).index(end_user_id)])
         del (sessions_ids_dict[old_socket_id])
     except ValueError:
         pass
 
-    session_id_from_dict = {current_socket_id: user_id}
-    sessions_ids_dict.update(session_id_from_dict)
+    session_id_dict = {current_socket_id: end_user_id}
+    sessions_ids_dict.update(session_id_dict)
     print(sessions_ids_dict)
     print('on_get_id')
 
@@ -53,36 +53,20 @@ def on_disconnect():
 
 @socket.on('connect to page')
 def on_connect_to_page(data):
-    user_id = data.get("id")
-    url = data.get("url")
+    end_user_id = data.get("end_user_id")
+    web_page_url = data.get("web_page_url")
 
-    ids_from_list = [i for i, d in enumerate(users_urls_list) if user_id in d.values()]
+    ids_from_list = [i for i, d in enumerate(users_urls_list) if end_user_id in d.values()]
     for i in ids_from_list:
         del (users_urls_list[i])
 
-    users_urls_list.append({"id": user_id, "url": url})
-    # print(users_urls_list)
+    users_urls_list.append({"id": end_user_id, "url": web_page_url})
+    print(users_urls_list)
     print('went to the page')
-
-
-# @socket.on('disconnect from page')
-# def on_disconnect_from_page(data):
-#     user_id = data.get("id")
-#     url = data.get("url")
-#     print(user_id)
-#     print(url)
-#     print('disconnect from page')
-
-
-class Test(Resource):
-    def get(self):
-        response = jsonify(sessions_ids_dict)
-        return response
 
 
 api.add_resource(AdminLogin, '/api/admin/login/')
 
-api.add_resource(Test, '/api/admin/lol')
 api.add_resource(AdminUsersList, '/api/admin/users')
 
 # api.add_resource(ProtectArea, '/api/protect-area/')
