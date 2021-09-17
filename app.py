@@ -17,69 +17,38 @@ CORS(app)
 
 api = Api(app)
 
-sessions_ids_list = []
-
-
-# class ProtectArea(Resource):
-#     @jwt_required
-#     def get(self):
-#         return {'answer': 42}
-
-
-# @socket.on('connect')
-# def on_connect():
-#     print('on_connect')
+sessions_ids_dict = {}
 
 
 @socket.on('give id in start')
 def on_get_id_in_start(data):
     current_socket_id = request.sid
     user_id = data.get("id")
-    session_id_dict = {"session_id": current_socket_id, "user_id": user_id}
-    sessions_ids_list.append(session_id_dict)
-    print(sessions_ids_list)
+    try:
+        old_socket_id = (list(sessions_ids_dict.keys())[list(sessions_ids_dict.values()).index(user_id)])
+        del (sessions_ids_dict[old_socket_id])
+    except ValueError:
+        pass
+
+    session_id_from_dict = {current_socket_id: user_id}
+    sessions_ids_dict.update(session_id_from_dict)
+    print(sessions_ids_dict)
     print('on_get_id')
-
-
-@socket.on('test')
-def test(data):
-    # current_socket_id = request.sid
-    # user_id = data.get("id")
-    # session_id_dict = {"session_id": current_socket_id, "user_id": user_id}
-    # sessions_ids_list.append(session_id_dict)
-    # print(sessions_ids_list)
-    print('test')
 
 
 @socket.on('disconnect')
 def on_disconnect():
     current_socket_id = request.sid
     print(current_socket_id)
-    indexes_sid_from_list = [i for i, d in enumerate(sessions_ids_list) if current_socket_id in d.values()]
-    print("indexes_sid_from_list: ")
-    print(indexes_sid_from_list)
-    print()
-    # for i in indexes_sid_from_list:
-    user_id = sessions_ids_list[indexes_sid_from_list[0]].get("user_id")
-    indexes_user_id_from_list = [i for i, d in enumerate(sessions_ids_list) if user_id in d.values()]
-    if len(indexes_user_id_from_list) == 1:
+
+    user_id = sessions_ids_dict.pop(current_socket_id, False)
+    print(user_id)
+    if user_id:
         ids_from_list = [i for i, d in enumerate(users_urls_list) if user_id in d.values()]
         for i in ids_from_list:
             del (users_urls_list[i])
-    print(user_id)
-    del (sessions_ids_list[indexes_sid_from_list[0]])
-    print(sessions_ids_list)
+    print(sessions_ids_dict)
     print('on_disconnect')
-
-
-# @socket.on_error()
-# def error_handler(e):
-#     current_socket_id = request.sid
-#     session_id = next((index for (index, d) in enumerate(sessions_ids_list) if d["session_id"] == current_socket_id),
-#                       None)
-#     if session_id:
-#         del (sessions_ids_list[session_id])
-#     print("on_error")
 
 
 @socket.on('connect to page')
@@ -107,7 +76,7 @@ def on_connect_to_page(data):
 
 class Test(Resource):
     def get(self):
-        response = jsonify(sessions_ids_list)
+        response = jsonify(sessions_ids_dict)
         return response
 
 

@@ -28,12 +28,12 @@ class Main extends React.Component {
 
     componentDidMount() {
         socket.on("connect", () => (socket.emit("give id in start", {id: getId()})))
-        socket.on("disconnect", () => (socket.emit("test", {id: getId()})))
+        // socket.on("disconnect", () => (socket.emit("test", {id: getId()})))
     }
 
     componentWillUnmount() {
         socket.off("connect")
-        socket.off("disconnect")
+        // socket.off("disconnect")
     }
 
     render() {
