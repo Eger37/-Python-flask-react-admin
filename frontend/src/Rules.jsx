@@ -20,8 +20,12 @@ export default class RulePage extends React.Component {
 
     render() {
         return (
-            <div className={css.mainer}>
-                <NavLink to={"/"}>main</NavLink> &nbsp;|&nbsp;
+            <div className={css.box}>
+                <NavLink to={"/"}>
+                    <div className={css.reroutingButton}>
+                        main
+                    </div>
+                </NavLink>
             </div>
         )
     }

@@ -1,3 +1,24 @@
-.rerouting{
+.box {
+    width: 90vw;
+    height: 90vh;
+    margin: 5vh auto 5vh auto;
+    border: 8px solid #000000;
+    box-sizing: border-box;
+    background: linear-gradient(180deg, #ECE5BF 0%, rgba(255, 255, 255, 0) 100%);
+    position: relative
+}
 
+.reroutingButton {
+    font-size: 77px;
+    margin: 0 -50% 0 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    display: inline-block;
+    padding: 5px 20px;
+    border: 5px solid #000000;
+    box-sizing: border-box;
+    background: linear-gradient(180deg, #ECE5BF 0%, rgba(255, 255, 255, 0) 100%);
 }

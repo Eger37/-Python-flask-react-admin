@@ -21,9 +21,12 @@ export default class MainInfo extends React.Component {
 
     render() {
         return (
-            <div>HELLO
-                <div className={css.rerouting}/>
-                <NavLink to={"/rule-page"}>rules</NavLink> &nbsp;|&nbsp;
+            <div className={css.box}>
+                <NavLink to={"/rule-page"}>
+                    <div className={css.reroutingButton}>
+                        rules
+                    </div>
+                </NavLink>
             </div>
         )
     }
