@@ -93,7 +93,7 @@ def on_connect_to_page(data):
 
     users_urls_list.append({"id": user_id, "url": url})
     # print(users_urls_list)
-    # print('went to the page')
+    print('went to the page')
 
 
 # @socket.on('disconnect from page')
