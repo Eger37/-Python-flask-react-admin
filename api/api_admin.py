@@ -1,39 +1,38 @@
 from flask import request, jsonify
 from flask_restful import Resource, reqparse, abort
 from flask_jwt_extended import create_access_token
-
 from operator import itemgetter
 
-users_list = [{"id": 0, "name": "Никита12"},
-              {"id": 1, "name": "Ники6та5"},
-              {"id": 2, "name": "Ники6та4"},
-              {"id": 3, "name": "Ники6та35"},
-              {"id": 4, "name": "Ники6та92"},
-              {"id": 5, "name": "Никита856"},
-              {"id": 6, "name": "Никита467"},
-              {"id": 7, "name": "Никита316"},
-              {"id": 8, "name": "Ник6ита262"},
-              {"id": 9, "name": "Никита222"},
-              {"id": 10, "name": "Н6икита12"},
-              {"id": 11, "name": "Никита51"},
-              {"id": 12, "name": "Ни6кита41"},
-              {"id": 13, "name": "Ник6ита315"},
-              {"id": 14, "name": "Никита912"},
-              {"id": 15, "name": "Ник6ита185"},
-              {"id": 16, "name": "Никита471"},
-              {"id": 17, "name": "Ники6та311"},
-              {"id": 18, "name": "Никита122"},
-              {"id": 19, "name": "Олег315"},
-              {"id": 20, "name": "Виктор912"},
-              {"id": 21, "name": "Валера185"},
-              {"id": 22, "name": "Никалераита471"},
-              {"id": 23, "name": "Никиалера6та311"},
-              {"id": 24, "name": "Ниалеракита122"},
-              {"id": 25, "name": "Никалераи6та122"}]
+users_urls_list = [{"id": "0", "url": "a"},
+                   # {"id": "1", "url": "b"},
+                   # {"id": "2", "url": "c"},
+                   # {"id": "3", "url": "Ники6та35"},
+                   # {"id": "4", "url": "Ники6та92"},
+                   # {"id": "5", "url": "Никита856"},
+                   # {"id": "6", "url": "Никита467"},
+                   # {"id": "7", "url": "Никита316"},
+                   # {"id": "8", "url": "Ник6ита262"},
+                   # {"id": "9", "url": "Никита222"},
+                   # {"id": "10", "url": "Н6икита12"},
+                   # {"id": "11", "url": "Никита51"},
+                   # {"id": "12", "url": "Ни6кита41"},
+                   # {"id": "13", "url": "Ник6ита315"},
+                   # {"id": "14", "url": "Никита912"},
+                   # {"id": "15", "url": "Ник6ита185"},
+                   # {"id": "16", "url": "Никита471"},
+                   # {"id": "17", "url": "Ники6та311"},
+                   # {"id": "18", "url": "Никита122"},
+                   # {"id": "19", "url": "Олег315"},
+                   # {"id": "20", "url": "Виктор912"},
+                   # {"id": "21", "url": "Валера185"},
+                   # {"id": "22", "url": "Никалераита471"},
+                   # {"id": "23", "url": "Никиалера6та311"},
+                   # {"id": "24", "url": "Ниалеракита122"},
+                   {"id": "25", "url": "Никалераи6та122"}]
 
 
 def abort_if_todo_doesnt_exist(user_id):
-    if user_id not in users_list:
+    if user_id not in users_urls_list:
         abort(404, message="users_list {} doesn't exist".format(user_id))
 
 
@@ -86,7 +85,7 @@ class AdminLogin(Resource):
 
 class AdminUsersList(Resource):
     def get(self):
-        str_content_range, section_of_list = format_list(users_list)
+        str_content_range, section_of_list = format_list(users_urls_list)
         response = jsonify(section_of_list)
         response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3000')
         # response.headers.add('Access-Control-Allow-Origin', ' http://localhost:3001')

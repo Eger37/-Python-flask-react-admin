@@ -6,14 +6,17 @@ import {socket} from "./Main";
 import {getId} from "./auth";
 
 export default class MainInfo extends React.Component {
-
+    constructor(props) {
+        super(props)
+        this.state = {url: window.location.href}
+    }
 
     componentDidMount() {
-        socket.emit("connect to page", {id: getId(), url: window.location.href})
+        socket.emit("connect to page", {id: getId(), url: this.state.url})
     }
 
     componentWillUnmount() {
-        socket.emit("disconnect from page", {id: getId(), url: window.location.href})
+        // socket.emit("disconnect from page", {id: getId(), url: this.state.url})
     }
 
     render() {

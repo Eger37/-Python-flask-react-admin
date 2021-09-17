@@ -5,6 +5,7 @@ import io from "socket.io-client"
 // import css from "./Main.module.css"
 import MainInfo from "./MainInfo"
 import RulePage from "./Rules"
+import {getId} from "./auth";
 
 let socket = io.connect("localhost:5000/")
 
@@ -26,8 +27,8 @@ class Main extends React.Component {
 
 
     componentDidMount() {
-        socket.on("connect", () => (console.log("socket.on(connect)")))
-        socket.on("disconnect", () => (console.log("socket.on(disconnect)")))
+        socket.on("connect", () => (socket.emit("give id in start", {id: getId()})))
+        socket.on("disconnect", () => (socket.emit("test", {id: getId()})))
     }
 
     componentWillUnmount() {
