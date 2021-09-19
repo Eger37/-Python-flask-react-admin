@@ -3,7 +3,7 @@ from flask_restful import reqparse, abort, Api, Resource
 from flask_jwt_extended import JWTManager
 from flask_jwt_extended import jwt_required
 from flask_cors import CORS, cross_origin
-from flask_socketio import SocketIO, send, disconnect, emit, join_room, leave_room, rooms
+from flask_socketio import SocketIO
 
 from api.api_admin import AdminLogin, AdminUsersList, users_urls_list
 
@@ -39,14 +39,14 @@ def on_get_id_in_start(data):
 @socket.on('disconnect')
 def on_disconnect():
     current_socket_id = request.sid
-    print(current_socket_id)
 
     user_id = sessions_ids_dict.pop(current_socket_id, False)
-    print(user_id)
     if user_id:
         ids_from_list = [i for i, d in enumerate(users_urls_list) if user_id in d.values()]
         for i in ids_from_list:
             del (users_urls_list[i])
+        socket.emit("refresh_user_urls_list")
+
     print(sessions_ids_dict)
     print('on_disconnect')
 
@@ -61,6 +61,7 @@ def on_connect_to_page(data):
         del (users_urls_list[i])
 
     users_urls_list.append({"id": end_user_id, "url": web_page_url})
+    socket.emit("refresh_user_urls_list")
     print(users_urls_list)
     print('went to the page')
 
