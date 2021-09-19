@@ -9550,6 +9550,13 @@ ra-language-english@^3.17.2:
   dependencies:
     ra-core "^3.17.2"
 
+ra-realtime@^2.8.6:
+  version "2.8.6"
+  resolved "https://registry.yarnpkg.com/ra-realtime/-/ra-realtime-2.8.6.tgz#c3d1e70425bcd86f0df082db0b8bea3d4ec26667"
+  integrity sha512-JpnwV3z7JLbGR0mVv3ag/pxTrN35mwbyad9gXng8zuLErw7xQ/hryJtRAn23FvO6vovlQtopFmwp1KN+kDCx+w==
+  dependencies:
+    lodash "~4.17.5"
+
 ra-ui-materialui@^3.17.2:
   version "3.17.2"
   resolved "https://registry.yarnpkg.com/ra-ui-materialui/-/ra-ui-materialui-3.17.2.tgz#2fda5e65d8f6d4f01ef8d63b59a160bb0b7f70dc"
@@ -9751,6 +9758,11 @@ react-router-dom@^5.1.0:
     react-router "5.2.0"
     tiny-invariant "^1.0.2"
     tiny-warning "^1.0.0"
+
+react-router-redux@^4.0.8:
+  version "4.0.8"
+  resolved "https://registry.yarnpkg.com/react-router-redux/-/react-router-redux-4.0.8.tgz#227403596b5151e182377dab835b5d45f0f8054e"
+  integrity sha1-InQDWWtRUeGCN32rg1tdRfD4BU4=
 
 react-router@5.2.0, react-router@^5.1.0:
   version "5.2.0"
