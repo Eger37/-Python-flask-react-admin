@@ -5,9 +5,11 @@ import io from "socket.io-client"
 // import css from "./Main.module.css"
 import MainInfo from "./MainInfo"
 import RulePage from "./Rules"
-import {getId} from "./auth";
+import {getId} from "./auth"
+import CF from "./config.json"
 
-let socket = io.connect("localhost:5000/")
+
+let socket = io.connect(`${CF.host}:${CF.server_port}/`)
 
 
 class Main extends React.Component {
@@ -15,16 +17,6 @@ class Main extends React.Component {
         super(props)
         this.state = {}
     }
-
-
-    // EmitJoinMyRoom = () => {
-    //     socket.emit("join my room", getAccessToken())
-    // }
-    //
-    // EmitLeaveMyRoom = () => {
-    //     socket.emit("leave my room", getAccessToken())
-    // }
-
 
     componentDidMount() {
         socket.on("connect", () => (socket.emit("give id in start", {end_user_id: getId()})))

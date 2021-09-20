@@ -1,0 +1,6 @@
+{
+  "host": "192.168.43.14",
+  "server_port": "5000",
+  "client_port": "3001",
+  "admin_port": "3000"
+}

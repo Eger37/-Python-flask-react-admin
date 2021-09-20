@@ -1,8 +1,9 @@
 import {fetchUtils} from 'react-admin'
-// import axios from 'axios'
 import {stringify} from 'query-string'
 
-const apiUrl = 'http://localhost:5000/api/admin'
+import CF from "./config.json"
+// const apiUrl = 'http://localhost:5000/api/admin'
+const apiUrl = `http://${CF.host}:${CF.server_port}/api/admin`
 
 const httpClient = fetchUtils.fetchJson
 

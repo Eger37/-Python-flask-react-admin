@@ -6,10 +6,15 @@ from flask_cors import CORS, cross_origin
 from flask_socketio import SocketIO
 
 from api.api_admin import AdminLogin, AdminUsersList, users_urls_list
+from api.config import config as CF
 
 app = Flask(__name__)
 
-socket = SocketIO(app, cors_allowed_origins=["http://localhost:3000", "http://localhost:3001"], logger=True)
+cors_allowed_origins = [f"http://{CF.host}:{CF.client_port}", f"http://{CF.host}:{CF.admin_port}",
+                        f"http://localhost:{CF.client_port}", f"http://localhost:{CF.admin_port}"]
+# print(cors_allowed_origins)
+socket = SocketIO(app, cors_allowed_origins=cors_allowed_origins,
+                  logger=True)
 
 app.config['JWT_SECRET_KEY'] = 'my_cool_secret'
 jwt = JWTManager(app)
@@ -32,8 +37,8 @@ def on_get_id_in_start(data):
 
     session_id_dict = {current_socket_id: end_user_id}
     sessions_ids_dict.update(session_id_dict)
-    print(sessions_ids_dict)
-    print('on_get_id')
+    # print(sessions_ids_dict)
+    # print('on_get_id')
 
 
 @socket.on('disconnect')
@@ -47,8 +52,8 @@ def on_disconnect():
             del (users_urls_list[i])
         socket.emit("refresh_user_urls_list")
 
-    print(sessions_ids_dict)
-    print('on_disconnect')
+    # print(sessions_ids_dict)
+    # print('on_disconnect')
 
 
 @socket.on('connect to page')
@@ -62,8 +67,8 @@ def on_connect_to_page(data):
 
     users_urls_list.append({"id": end_user_id, "url": web_page_url})
     socket.emit("refresh_user_urls_list")
-    print(users_urls_list)
-    print('went to the page')
+    # print(users_urls_list)
+    # print('went to the page')
 
 
 api.add_resource(AdminLogin, '/api/admin/login/')
@@ -74,4 +79,4 @@ api.add_resource(AdminUsersList, '/api/admin/users')
 
 if __name__ == '__main__':
     # app.run(debug=True, host='0.0.0.0', port=5000)
-    socket.run(app, host='0.0.0.0', debug=True, port=5000)
+    socket.run(app, host=CF.host, debug=True, port=CF.server_port)

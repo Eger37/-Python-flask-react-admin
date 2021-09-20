@@ -8,8 +8,9 @@ import {UserList} from './users'
 
 import authProvider from './authProvider'
 import dataProvider from "./dataProvider"
+import CF from "./config.json"
 
-let socket = io.connect("localhost:5000/")
+let socket = io.connect(`${CF.host}:${CF.server_port}/`)
 
 class Main extends React.Component {
     render() {
