@@ -87,7 +87,7 @@ class AdminUsersList(Resource):
     def get(self):
         str_content_range, section_of_list = format_list(users_urls_list)
         response = jsonify(section_of_list)
-        response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3000')
+        # response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3000')
         # response.headers.add('Access-Control-Allow-Origin', ' http://localhost:3001')
         # response.headers.add('content-type', 'application/json')
         # response.headers.add('Access-Control-Allow-Headers', 'content-range')

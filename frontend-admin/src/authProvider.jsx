@@ -1,6 +1,7 @@
 import {AUTH_LOGIN, AUTH_LOGOUT, AUTH_ERROR, AUTH_CHECK, AUTH_GET_PERMISSIONS} from 'react-admin'
 import axios from 'axios'
 import decodeJwt from 'jwt-decode'
+import CF from "./config.json"
 
 export default (type, params) => {
 
@@ -8,7 +9,7 @@ export default (type, params) => {
         const {username, password} = params
         let data = JSON.stringify({username, password})
 
-        return axios.post('http://localhost:5000/api/admin/login/', data, {
+        return axios.post(`http://${CF.host}:${CF.server_port}/api/admin/login/`, data, {
             headers: {
                 'Content-Type': 'application/json',
             }
