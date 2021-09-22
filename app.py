@@ -12,7 +12,7 @@ app = Flask(__name__)
 
 cors_allowed_origins = [f"http://{CF.host}:{CF.client_port}", f"http://{CF.host}:{CF.admin_port}",
                         f"http://localhost:{CF.client_port}", f"http://localhost:{CF.admin_port}"]
-# print(cors_allowed_origins)
+print(cors_allowed_origins)
 socket = SocketIO(app, cors_allowed_origins=cors_allowed_origins,
                   logger=True)
 
@@ -79,4 +79,5 @@ api.add_resource(AdminUsersList, '/api/admin/users')
 
 if __name__ == '__main__':
     # app.run(debug=True, host='0.0.0.0', port=5000)
-    socket.run(app, host=CF.host, debug=True, port=CF.server_port)
+    # socket.run(app, host=CF.host, debug=True, port=CF.server_port)
+    socket.run(app, host='0.0.0.0', debug=True, port=CF.server_port)

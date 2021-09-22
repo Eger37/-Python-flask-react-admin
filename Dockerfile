@@ -12,8 +12,8 @@ RUN pip install -r ./requirements.txt
 
 EXPOSE 5000
 
-CMD python app.py
+CMD ["python", "app.py"]
 
 
 
-# docker run --rm -p 5000:5000 pyramid python3 app.py
+# docker run --rm -p 5000:5000 pyramid python app.py
