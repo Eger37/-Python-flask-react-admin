@@ -1,0 +1,15 @@
+FROM node:14
+WORKDIR /frontend-admin
+
+COPY frontend-admin/yarn.lock frontend-admin/package.json ./
+COPY frontend-admin/src/* ./src/
+COPY frontend-admin/public/* ./public/
+
+
+RUN yarn install
+
+RUN ["ls"]
+
+EXPOSE 3000
+
+CMD ["yarn", "start"]

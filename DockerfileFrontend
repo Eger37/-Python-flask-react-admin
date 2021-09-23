@@ -1,0 +1,15 @@
+FROM node:14
+WORKDIR /frontend
+
+COPY frontend/yarn.lock frontend/package.json ./
+COPY frontend/src/* ./src/
+COPY frontend/public/* ./public/
+
+
+RUN yarn install
+
+RUN ["ls"]
+
+EXPOSE 3001
+
+CMD ["yarn", "start"]
