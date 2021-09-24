@@ -8,10 +8,9 @@ COPY frontend/public/* ./public/
 COPY frontend/node_modules ./node_modules
 
 # RUN yarn install
-WORKDIR /frontend/src
-RUN ["ls"]
+RUN apt-get update
+RUN apt-get install nano
 
-WORKDIR /frontend
 EXPOSE 3001
 
 CMD ["yarn", "start"]
