@@ -5,8 +5,9 @@ COPY frontend-admin/yarn.lock frontend-admin/package.json ./
 COPY frontend-admin/src/* ./src/
 COPY frontend-admin/public/* ./public/
 
+COPY frontend-admin/node_modules ./node_modules
 
-RUN yarn install
+# RUN yarn install
 
 RUN ["ls"]
 

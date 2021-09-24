@@ -58,6 +58,7 @@ def on_disconnect():
 
 @socket.on('connect to page')
 def on_connect_to_page(data):
+    # print(data)
     end_user_id = data.get("end_user_id")
     web_page_url = data.get("web_page_url")
 

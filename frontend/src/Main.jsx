@@ -15,11 +15,17 @@ let socket = io.connect(`${CF.host}:${CF.server_port}/`)
 class Main extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {}
+        this.state = {web_page_url: window.location.href}
+    }
+
+    socketOnConnect() {
+        socket.emit("give id in start", {end_user_id: getId()})
+        socket.emit("connect to page", {"end_user_id": getId(), "web_page_url": this.state.web_page_url})
+
     }
 
     componentDidMount() {
-        socket.on("connect", () => (socket.emit("give id in start", {end_user_id: getId()})))
+        socket.on("connect", () => (this.socketOnConnect()))
         // socket.on("disconnect", () => (socket.emit("test", {id: getId()})))
     }
 

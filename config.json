@@ -1,8 +1,5 @@
 {
-  "host4": "localhost",
-  "host5": "0.0.0.0",
   "host": "192.168.43.14",
-  "host22": "192.17.0.2",
   "server_port": "5000",
   "client_port": "3001",
   "admin_port": "3000"
