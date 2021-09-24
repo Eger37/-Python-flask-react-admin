@@ -5,10 +5,12 @@ COPY frontend/yarn.lock frontend/package.json ./
 COPY frontend/src/ ./src/
 COPY frontend/public/* ./public/
 
-COPY frontend/node_modules ./node_modules
+# COPY frontend/node_modules ./node_modules
 
-# RUN yarn install
+RUN yarn install
+
 RUN apt-get update
+RUN apt-get -y install curl
 RUN apt-get install nano
 
 EXPOSE 3001

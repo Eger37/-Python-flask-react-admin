@@ -7,6 +7,7 @@ COPY api/* ./api/
 
 RUN pip install -r ./requirements.txt
 RUN apt-get update
+RUN apt-get -y install curl
 RUN apt-get install nano
 
 # WORKDIR /app/api
