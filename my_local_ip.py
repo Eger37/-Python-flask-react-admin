@@ -1,10 +1,6 @@
-import netifaces
+import socket
 
-interfaces = netifaces.interfaces()
-for i in interfaces:
-    if i == 'lo':
-        continue
-    iface = netifaces.ifaddresses(i).get(netifaces.AF_INET)
-    if iface != None:
-        for j in iface:
-            print(j['addr'])
+s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+s.connect(("8.8.8.8", 80))
+print(s.getsockname()[0])
+s.close()

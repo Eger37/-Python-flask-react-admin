@@ -3,4 +3,3 @@ flask_restful
 flask_cors
 flask_jwt_extended
 flask_socketio
-netifaces
